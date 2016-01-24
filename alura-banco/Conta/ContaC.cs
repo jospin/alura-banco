@@ -3,23 +3,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using alura_banco.Cliente;
 
-namespace alura_banco.Conta
+namespace alura_banco.Cliente
 {
     class ContaC
     {
         public int agencia;
         public int numero;
-        public string titular;
+        public ClienteC titular;
         public double saldo;
-        public string cpf;
 
         public void Saque(double valor)
         {
-            if(valor <= this.saldo && valor >= 0)
+            bool naoLimitaSaque = titular.EhMaiorDeIdade();
+            if (!naoLimitaSaque && valor > 200)
             {
-                this.saldo -= valor;
+                throw new Exception("Saque de menor de idade limitado à 200");
             }
+            if(valor >= this.saldo || valor < 0)
+            {
+                throw new Exception("Saldo insuficiente");
+            }
+            this.saldo -= valor;
         }
 
         public void Transfere(double valor, ContaC destino)

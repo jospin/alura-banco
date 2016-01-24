@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using alura_banco.Conta;
+using alura_banco.Cliente;
 
 namespace alura_banco
 {
@@ -25,19 +25,33 @@ namespace alura_banco
 
         private void button1_Click(object sender, EventArgs e)
         {
+            /*
             ContaC contaL = new ContaC();
             contaL.numero = 1;
-            contaL.titular = "Lucien";
+            contaL.titular = new ClienteC("Lucien", 37);
             contaL.Deposita(2000);
+            */
 
             ContaC contaC = new ContaC();
             contaC.numero = 1;
-            contaC.titular = "Cristina";
+            contaC.titular = new ClienteC("Cristina", 17);
             contaC.Deposita(0);
-
-            contaL.Transfere(250, contaC);
-
-            MessageBox.Show("Saldo após o saque: " + contaL.saldo);
+            bool maior = contaC.titular.EhMaiorDeIdade();
+            if (!maior)
+            {
+                MessageBox.Show("Cristina não é maior de idade");
+            }
+            try
+            {
+                contaC.Saque(150);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Erro na operação: " + ex.Message);
+            }
+            
+            MessageBox.Show("Conta cliente: " + contaC.titular.nome);
+            //MessageBox.Show("Saldo após o saque: " + contaL.saldo);
             MessageBox.Show("Saldo após o transferência: " + contaC.saldo);
 
 
