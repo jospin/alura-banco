@@ -25,12 +25,22 @@ namespace alura_banco
 
         private void button1_Click(object sender, EventArgs e)
         {
-            ContaC conta = new ContaC();
-            conta.numero = 1;
-            conta.titular = "Lucien";
-            conta.saldo = 2000;
+            ContaC contaL = new ContaC();
+            contaL.numero = 1;
+            contaL.titular = "Lucien";
+            contaL.Deposita(2000);
 
-            MessageBox.Show("Conta é: " + conta.numero + " - " + conta.titular);
+            ContaC contaC = new ContaC();
+            contaC.numero = 1;
+            contaC.titular = "Cristina";
+            contaC.Deposita(0);
+
+            contaL.Transfere(250, contaC);
+
+            MessageBox.Show("Saldo após o saque: " + contaL.saldo);
+            MessageBox.Show("Saldo após o transferência: " + contaC.saldo);
+
+
         }
     }
 }

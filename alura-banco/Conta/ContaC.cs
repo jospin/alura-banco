@@ -14,5 +14,27 @@ namespace alura_banco.Conta
         public double saldo;
         public string cpf;
 
+        public void Saque(double valor)
+        {
+            if(valor <= this.saldo && valor >= 0)
+            {
+                this.saldo -= valor;
+            }
+        }
+
+        public void Transfere(double valor, ContaC destino)
+        {
+            Saque(valor);
+            destino.Deposita(valor);
+        }
+
+        public void Deposita(double valor)
+        {
+            if(valor >= 0)
+            {
+                this.saldo += valor;
+            }
+        }
+
     }
 }
