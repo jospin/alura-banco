@@ -1,31 +1,32 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using alura_banco.Cliente;
 
 namespace alura_banco.Cliente
 {
-    class ContaC
+    public class ContaC
     {
-        public int agencia;
-        public int numero;
-        public ClienteC titular;
-        public double saldo;
+        // Declaração de Properties
+        public int Agencia { get; set; }
+        public int Numero { get; set; }
+        public ClienteC Titular { get; protected set; }
+        public double Saldo { get; protected set; }
 
-        public void Saque(double valor)
+        public ContaC(ClienteC cliente)
         {
-            bool naoLimitaSaque = titular.EhMaiorDeIdade();
-            if (!naoLimitaSaque && valor > 200)
+            this.Titular = cliente;
+        }
+
+        public virtual void Saque(double valor)
+        {
+
+            if (!Titular.EhMaiorDeIdade && valor > 200)
             {
                 throw new Exception("Saque de menor de idade limitado à 200");
             }
-            if(valor >= this.saldo || valor < 0)
+            if(valor >= this.Saldo || valor < 0)
             {
                 throw new Exception("Saldo insuficiente");
             }
-            this.saldo -= valor;
+            this.Saldo -= valor;
         }
 
         public void Transfere(double valor, ContaC destino)
@@ -38,7 +39,10 @@ namespace alura_banco.Cliente
         {
             if(valor >= 0)
             {
-                this.saldo += valor;
+                this.Saldo += valor;
+            } else
+            {
+                throw new Exception("Valor do depósito deve ser positivo");
             }
         }
 

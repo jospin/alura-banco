@@ -45,8 +45,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Banco\Banco.cs" />
     <Compile Include="Cliente\ClienteC.cs" />
     <Compile Include="Conta\ContaC.cs" />
+    <Compile Include="Conta\ContaCorrente.cs" />
+    <Compile Include="Conta\ContaPoupanca.cs" />
+    <Compile Include="Conta\Totalizador.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

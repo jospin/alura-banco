@@ -6,29 +6,27 @@ using System.Threading.Tasks;
 
 namespace alura_banco.Cliente
 {
-    class ClienteC
+    public class ClienteC
     {
-        public string nome;
-        public string rg;
-        public string cpf;
-        public string endereco;
-        public int idade;
+        // Declarações de Properties
+        public string Nome { get; private set; }
+        public string Rg { get; set; }
+        public string Cpf { get; set; }
+        public string Endereco { get; set; }
+        public int Idade { get; private set; }
 
         public ClienteC(string nome, int idade)
         {
-            this.nome = nome;
-            this.idade = idade;
+            this.Nome = nome;
+            this.Idade = idade;
         }
 
-        public bool EhMaiorDeIdade()
+        public bool EhMaiorDeIdade
         {
-            if(this.idade >= 18)
+            get
             {
-                return true;
+                return this.Idade >= 18;
             }
-            return false;
         }
-
-
     }
 }
