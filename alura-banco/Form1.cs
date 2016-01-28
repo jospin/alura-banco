@@ -8,7 +8,8 @@ namespace alura_banco
     public partial class Form1 : Form
     {
         private ContaC conta;
-        private ContaC[] contasCadastro = new ContaC[4];
+        private ContaC[] contasCadastro;
+        private ContaC destino;
         public Form1()
         {
             InitializeComponent();
@@ -22,7 +23,7 @@ namespace alura_banco
             this.conta.Numero = 1;
             this.conta.Agencia = 12;
             this.MostraConta();
-
+            this.contasCadastro = new ContaC[4];
             ClienteC t1 = new ClienteC("Gabriel", 14);
             this.contasCadastro[0] = new ContaCorrente(t1);
             ClienteC t2 = new ClienteC("Caroline", 8);
@@ -78,6 +79,28 @@ namespace alura_banco
             textCliente.Text = this.conta.Titular.Nome;
             textCpf.Text = this.conta.Titular.Cpf;
             textSaldo.Text = Convert.ToString(this.conta.Saldo);
+
+        }
+
+        private void comboDestinos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int indiceSelecionado = comboDestinos.SelectedIndex;
+            this.destino = this.contasCadastro[indiceSelecionado];
+            textDestinoNumero.Text = Convert.ToString(this.destino.Numero);
+        }
+
+        private void transferenciaButton_Click(object sender, EventArgs e)
+        {
+            double valor = Convert.ToDouble(textDestinoValor.Text);
+            try
+            {
+                this.conta.Transfere(valor, this.destino);
+                MessageBox.Show("Transferência realizada");
+            } catch(Exception ex)
+            {
+                MessageBox.Show("Operação não realizada: "+ex.Message);
+            }
+            MostraConta();
 
         }
     }

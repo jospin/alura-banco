@@ -2,7 +2,7 @@
 
 namespace alura_banco.Cliente
 {
-    public class ContaC
+    public abstract class ContaC
     {
         // Declaração de Properties
         public int Agencia { get; set; }
@@ -15,19 +15,7 @@ namespace alura_banco.Cliente
             this.Titular = cliente;
         }
 
-        public virtual void Saque(double valor)
-        {
-
-            if (!Titular.EhMaiorDeIdade && valor > 200)
-            {
-                throw new Exception("Saque de menor de idade limitado à 200");
-            }
-            if(valor >= this.Saldo || valor < 0)
-            {
-                throw new Exception("Saldo insuficiente");
-            }
-            this.Saldo -= valor;
-        }
+        public abstract void Saque(double valor);
 
         public void Transfere(double valor, ContaC destino)
         {
@@ -45,6 +33,5 @@ namespace alura_banco.Cliente
                 throw new Exception("Valor do depósito deve ser positivo");
             }
         }
-
     }
 }
